@@ -1,0 +1,22 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+
+<http://mapping.example.com/map_stops_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_004> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_033> ;
+    rr:subjectMap <http://mapping.example.com/s_004> .
+
+<http://mapping.example.com/om_034> rr:column "stop_name" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/pm_033> rr:constant <http://xmlns.com/foaf/0.1/name> .
+
+<http://mapping.example.com/pom_033> rr:objectMap <http://mapping.example.com/om_034> ;
+    rr:predicateMap <http://mapping.example.com/pm_033> .
+
+<http://mapping.example.com/s_004> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Stop> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/stops/{stop_id}" .
+
+<http://mapping.example.com/source_004> a rr:LogicalTable ;
+    rr:tableName "STOPS" .
+

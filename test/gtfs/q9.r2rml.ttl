@@ -1,0 +1,156 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://mapping.example.com/map_stops_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_004> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_035> ;
+    rr:subjectMap <http://mapping.example.com/s_004> .
+
+<http://mapping.example.com/map_trips_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_001> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_010>,
+        <http://mapping.example.com/pom_014>,
+        <http://mapping.example.com/pom_015>,
+        <http://mapping.example.com/pom_016> ;
+    rr:subjectMap <http://mapping.example.com/s_001> .
+
+<http://mapping.example.com/jc_002> rr:child "service_id" ;
+    rr:parent "service_id" .
+
+<http://mapping.example.com/jc_003> rr:child "service_id" ;
+    rr:parent "service_id" .
+
+<http://mapping.example.com/jc_004> rr:child "route_id" ;
+    rr:parent "route_id" .
+
+<http://mapping.example.com/jc_005> rr:child "shape_id" ;
+    rr:parent "shape_id" .
+
+<http://mapping.example.com/jc_010> rr:child "shape_id" ;
+    rr:parent "shape_id" .
+
+<http://mapping.example.com/map_routes_000> rr:logicalTable <http://mapping.example.com/source_002> ;
+    rr:subjectMap <http://mapping.example.com/s_002> .
+
+<http://mapping.example.com/map_services1_000> rr:logicalTable <http://mapping.example.com/source_005> ;
+    rr:subjectMap <http://mapping.example.com/s_005> .
+
+<http://mapping.example.com/map_services2_000> rr:logicalTable <http://mapping.example.com/source_006> ;
+    rr:subjectMap <http://mapping.example.com/s_006> .
+
+<http://mapping.example.com/map_shapePoints_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_011> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_063> ;
+    rr:subjectMap <http://mapping.example.com/s_011> .
+
+<http://mapping.example.com/map_shapes_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_010> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_062> ;
+    rr:subjectMap <http://mapping.example.com/s_010> .
+
+<http://mapping.example.com/om_010> rr:column "trip_short_name" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_014> rr:joinCondition <http://mapping.example.com/jc_002> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_services1_000> .
+
+<http://mapping.example.com/om_015> rr:joinCondition <http://mapping.example.com/jc_003> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_services2_000> .
+
+<http://mapping.example.com/om_016> rr:joinCondition <http://mapping.example.com/jc_004> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_routes_000> .
+
+<http://mapping.example.com/om_017> rr:joinCondition <http://mapping.example.com/jc_005> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_shapes_000> .
+
+<http://mapping.example.com/om_036> rr:column "stop_lat" ;
+    rr:datatype xsd:double ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_063> rr:joinCondition <http://mapping.example.com/jc_010> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_shapePoints_000> .
+
+<http://mapping.example.com/om_064> rr:column "shape_pt_lat" ;
+    rr:datatype xsd:double ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/pm_010> rr:constant <http://vocab.gtfs.org/terms#shortName> .
+
+<http://mapping.example.com/pm_014> rr:constant <http://vocab.gtfs.org/terms#service> .
+
+<http://mapping.example.com/pm_015> rr:constant <http://vocab.gtfs.org/terms#route> .
+
+<http://mapping.example.com/pm_016> rr:constant <http://vocab.gtfs.org/terms#shape> .
+
+<http://mapping.example.com/pm_035> rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#lat> .
+
+<http://mapping.example.com/pm_062> rr:constant <http://vocab.gtfs.org/terms#shapePoint> .
+
+<http://mapping.example.com/pm_063> rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#lat> .
+
+<http://mapping.example.com/pom_010> rr:objectMap <http://mapping.example.com/om_010> ;
+    rr:predicateMap <http://mapping.example.com/pm_010> .
+
+<http://mapping.example.com/pom_014> rr:objectMap <http://mapping.example.com/om_014>,
+        <http://mapping.example.com/om_015> ;
+    rr:predicateMap <http://mapping.example.com/pm_014> .
+
+<http://mapping.example.com/pom_015> rr:objectMap <http://mapping.example.com/om_016> ;
+    rr:predicateMap <http://mapping.example.com/pm_015> .
+
+<http://mapping.example.com/pom_016> rr:objectMap <http://mapping.example.com/om_017> ;
+    rr:predicateMap <http://mapping.example.com/pm_016> .
+
+<http://mapping.example.com/pom_035> rr:objectMap <http://mapping.example.com/om_036> ;
+    rr:predicateMap <http://mapping.example.com/pm_035> .
+
+<http://mapping.example.com/pom_062> rr:objectMap <http://mapping.example.com/om_063> ;
+    rr:predicateMap <http://mapping.example.com/pm_062> .
+
+<http://mapping.example.com/pom_063> rr:objectMap <http://mapping.example.com/om_064> ;
+    rr:predicateMap <http://mapping.example.com/pm_063> .
+
+<http://mapping.example.com/s_001> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Trip> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/trips/{trip_id}" .
+
+<http://mapping.example.com/s_002> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/routes/{route_id}" .
+
+<http://mapping.example.com/s_004> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/stops/{stop_id}" .
+
+<http://mapping.example.com/s_005> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/services/{service_id}" .
+
+<http://mapping.example.com/s_006> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/services/{service_id}" .
+
+<http://mapping.example.com/s_010> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Shape> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/shape/{shape_id}" .
+
+<http://mapping.example.com/s_011> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/shape_point/{shape_id}-{shape_pt_sequence}" .
+
+<http://mapping.example.com/source_001> a rr:LogicalTable ;
+    rr:tableName "TRIPS" .
+
+<http://mapping.example.com/source_002> a rr:LogicalTable ;
+    rr:tableName "ROUTES" .
+
+<http://mapping.example.com/source_004> a rr:LogicalTable ;
+    rr:tableName "STOPS" .
+
+<http://mapping.example.com/source_005> a rr:LogicalTable ;
+    rr:tableName "CALENDAR" .
+
+<http://mapping.example.com/source_006> a rr:LogicalTable ;
+    rr:tableName "CALENDAR_DATES" .
+
+<http://mapping.example.com/source_010> a rr:LogicalTable ;
+    rr:tableName "SHAPES" .
+
+<http://mapping.example.com/source_011> a rr:LogicalTable ;
+    rr:tableName "SHAPES" .
+

@@ -1,0 +1,36 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+
+<http://mapping.example.com/map_stoptimes_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_000> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_007> ;
+    rr:subjectMap <http://mapping.example.com/s_000> .
+
+<http://mapping.example.com/jc_000> rr:child "trip_id" ;
+    rr:parent "trip_id" .
+
+<http://mapping.example.com/map_trips_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_001> ;
+    rr:subjectMap <http://mapping.example.com/s_001> .
+
+<http://mapping.example.com/om_007> rr:joinCondition <http://mapping.example.com/jc_000> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_trips_000> .
+
+<http://mapping.example.com/pm_007> rr:constant <http://vocab.gtfs.org/terms#trip> .
+
+<http://mapping.example.com/pom_007> rr:objectMap <http://mapping.example.com/om_007> ;
+    rr:predicateMap <http://mapping.example.com/pm_007> .
+
+<http://mapping.example.com/s_000> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#StopTime> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/stoptimes/{trip_id}-{stop_id}-{arrival_time}" .
+
+<http://mapping.example.com/s_001> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Trip> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/trips/{trip_id}" .
+
+<http://mapping.example.com/source_000> a rr:LogicalTable ;
+    rr:tableName "STOP_TIMES" .
+
+<http://mapping.example.com/source_001> a rr:LogicalTable ;
+    rr:tableName "TRIPS" .
+

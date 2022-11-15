@@ -1,0 +1,89 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://mapping.example.com/map_services1_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_005> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_043> ;
+    rr:subjectMap <http://mapping.example.com/s_005> .
+
+<http://mapping.example.com/map_services2_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_006> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_044> ;
+    rr:subjectMap <http://mapping.example.com/s_006> .
+
+<http://mapping.example.com/jc_008> rr:child "service_id" ;
+    rr:parent "service_id" .
+
+<http://mapping.example.com/jc_009> rr:child "service_id" ;
+    rr:parent "service_id" .
+
+<http://mapping.example.com/map_calendar_date_rules_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_007> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_045>,
+        <http://mapping.example.com/pom_046> ;
+    rr:subjectMap <http://mapping.example.com/s_007> .
+
+<http://mapping.example.com/map_calendar_rules_000> rr:logicalTable <http://mapping.example.com/source_008> ;
+    rr:subjectMap <http://mapping.example.com/s_008> .
+
+<http://mapping.example.com/om_044> rr:joinCondition <http://mapping.example.com/jc_008> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_calendar_rules_000> .
+
+<http://mapping.example.com/om_045> rr:joinCondition <http://mapping.example.com/jc_009> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_calendar_date_rules_000> .
+
+<http://mapping.example.com/om_046> rr:column "date" ;
+    rr:datatype xsd:date ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_047> rr:column "exception_type" ;
+    rr:datatype xsd:boolean ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/pm_043> rr:constant <http://vocab.gtfs.org/terms#serviceRule> .
+
+<http://mapping.example.com/pm_044> rr:constant <http://vocab.gtfs.org/terms#serviceRule> .
+
+<http://mapping.example.com/pm_045> rr:constant <http://purl.org/dc/terms/date> .
+
+<http://mapping.example.com/pm_046> rr:constant <http://vocab.gtfs.org/terms#dateAddition> .
+
+<http://mapping.example.com/pom_043> rr:objectMap <http://mapping.example.com/om_044> ;
+    rr:predicateMap <http://mapping.example.com/pm_043> .
+
+<http://mapping.example.com/pom_044> rr:objectMap <http://mapping.example.com/om_045> ;
+    rr:predicateMap <http://mapping.example.com/pm_044> .
+
+<http://mapping.example.com/pom_045> rr:objectMap <http://mapping.example.com/om_046> ;
+    rr:predicateMap <http://mapping.example.com/pm_045> .
+
+<http://mapping.example.com/pom_046> rr:objectMap <http://mapping.example.com/om_047> ;
+    rr:predicateMap <http://mapping.example.com/pm_046> .
+
+<http://mapping.example.com/s_005> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Service> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/services/{service_id}" .
+
+<http://mapping.example.com/s_006> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Service> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/services/{service_id}" .
+
+<http://mapping.example.com/s_007> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#CalendarDateRule> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/calendar_date_rule/{service_id}-{date}" .
+
+<http://mapping.example.com/s_008> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/calendar_rules/{service_id}" .
+
+<http://mapping.example.com/source_005> a rr:LogicalTable ;
+    rr:tableName "CALENDAR" .
+
+<http://mapping.example.com/source_006> a rr:LogicalTable ;
+    rr:tableName "CALENDAR_DATES" .
+
+<http://mapping.example.com/source_007> a rr:LogicalTable ;
+    rr:tableName "CALENDAR_DATES" .
+
+<http://mapping.example.com/source_008> a rr:LogicalTable ;
+    rr:tableName "CALENDAR" .
+

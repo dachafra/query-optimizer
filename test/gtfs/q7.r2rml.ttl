@@ -1,0 +1,185 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://mapping.example.com/map_stoptimes_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_000> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_007>,
+        <http://mapping.example.com/pom_008> ;
+    rr:subjectMap <http://mapping.example.com/s_000> .
+
+<http://mapping.example.com/jc_000> rr:child "trip_id" ;
+    rr:parent "trip_id" .
+
+<http://mapping.example.com/jc_001> rr:child "stop_id" ;
+    rr:parent "stop_id" .
+
+<http://mapping.example.com/jc_002> rr:child "service_id" ;
+    rr:parent "service_id" .
+
+<http://mapping.example.com/jc_003> rr:child "service_id" ;
+    rr:parent "service_id" .
+
+<http://mapping.example.com/jc_004> rr:child "route_id" ;
+    rr:parent "route_id" .
+
+<http://mapping.example.com/map_routes_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_002> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_017>,
+        <http://mapping.example.com/pom_019> ;
+    rr:subjectMap <http://mapping.example.com/s_002> .
+
+<http://mapping.example.com/map_services1_000> rr:logicalTable <http://mapping.example.com/source_005> ;
+    rr:subjectMap <http://mapping.example.com/s_005> .
+
+<http://mapping.example.com/map_services2_000> rr:logicalTable <http://mapping.example.com/source_006> ;
+    rr:subjectMap <http://mapping.example.com/s_006> .
+
+<http://mapping.example.com/map_stops_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_004> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_034>,
+        <http://mapping.example.com/pom_035>,
+        <http://mapping.example.com/pom_036>,
+        <http://mapping.example.com/pom_041> ;
+    rr:subjectMap <http://mapping.example.com/s_004> .
+
+<http://mapping.example.com/map_trips_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_001> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_010>,
+        <http://mapping.example.com/pom_014>,
+        <http://mapping.example.com/pom_015> ;
+    rr:subjectMap <http://mapping.example.com/s_001> .
+
+<http://mapping.example.com/om_007> rr:joinCondition <http://mapping.example.com/jc_000> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_trips_000> .
+
+<http://mapping.example.com/om_008> rr:joinCondition <http://mapping.example.com/jc_001> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_stops_000> .
+
+<http://mapping.example.com/om_010> rr:column "trip_short_name" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_014> rr:joinCondition <http://mapping.example.com/jc_002> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_services1_000> .
+
+<http://mapping.example.com/om_015> rr:joinCondition <http://mapping.example.com/jc_003> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_services2_000> .
+
+<http://mapping.example.com/om_016> rr:joinCondition <http://mapping.example.com/jc_004> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_routes_000> .
+
+<http://mapping.example.com/om_018> rr:column "route_short_name" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_020> rr:column "route_desc" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_035> rr:column "stop_desc" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_036> rr:column "stop_lat" ;
+    rr:datatype xsd:double ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_037> rr:column "stop_lon" ;
+    rr:datatype xsd:double ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_042> rr:template "http://transport.linkeddata.es/resource/WheelchairBoardingStatus/{wheelchair_boarding}" ;
+    rr:termType rr:IRI .
+
+<http://mapping.example.com/pm_007> rr:constant <http://vocab.gtfs.org/terms#trip> .
+
+<http://mapping.example.com/pm_008> rr:constant <http://vocab.gtfs.org/terms#stop> .
+
+<http://mapping.example.com/pm_010> rr:constant <http://vocab.gtfs.org/terms#shortName> .
+
+<http://mapping.example.com/pm_014> rr:constant <http://vocab.gtfs.org/terms#service> .
+
+<http://mapping.example.com/pm_015> rr:constant <http://vocab.gtfs.org/terms#route> .
+
+<http://mapping.example.com/pm_017> rr:constant <http://vocab.gtfs.org/terms#shortName> .
+
+<http://mapping.example.com/pm_019> rr:constant <http://purl.org/dc/terms/description> .
+
+<http://mapping.example.com/pm_034> rr:constant <http://purl.org/dc/terms/description> .
+
+<http://mapping.example.com/pm_035> rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#lat> .
+
+<http://mapping.example.com/pm_036> rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#long> .
+
+<http://mapping.example.com/pm_041> rr:constant <http://vocab.gtfs.org/terms#wheelchairAccessible> .
+
+<http://mapping.example.com/pom_007> rr:objectMap <http://mapping.example.com/om_007> ;
+    rr:predicateMap <http://mapping.example.com/pm_007> .
+
+<http://mapping.example.com/pom_008> rr:objectMap <http://mapping.example.com/om_008> ;
+    rr:predicateMap <http://mapping.example.com/pm_008> .
+
+<http://mapping.example.com/pom_010> rr:objectMap <http://mapping.example.com/om_010> ;
+    rr:predicateMap <http://mapping.example.com/pm_010> .
+
+<http://mapping.example.com/pom_014> rr:objectMap <http://mapping.example.com/om_014>,
+        <http://mapping.example.com/om_015> ;
+    rr:predicateMap <http://mapping.example.com/pm_014> .
+
+<http://mapping.example.com/pom_015> rr:objectMap <http://mapping.example.com/om_016> ;
+    rr:predicateMap <http://mapping.example.com/pm_015> .
+
+<http://mapping.example.com/pom_017> rr:objectMap <http://mapping.example.com/om_018> ;
+    rr:predicateMap <http://mapping.example.com/pm_017> .
+
+<http://mapping.example.com/pom_019> rr:objectMap <http://mapping.example.com/om_020> ;
+    rr:predicateMap <http://mapping.example.com/pm_019> .
+
+<http://mapping.example.com/pom_034> rr:objectMap <http://mapping.example.com/om_035> ;
+    rr:predicateMap <http://mapping.example.com/pm_034> .
+
+<http://mapping.example.com/pom_035> rr:objectMap <http://mapping.example.com/om_036> ;
+    rr:predicateMap <http://mapping.example.com/pm_035> .
+
+<http://mapping.example.com/pom_036> rr:objectMap <http://mapping.example.com/om_037> ;
+    rr:predicateMap <http://mapping.example.com/pm_036> .
+
+<http://mapping.example.com/pom_041> rr:objectMap <http://mapping.example.com/om_042> ;
+    rr:predicateMap <http://mapping.example.com/pm_041> .
+
+<http://mapping.example.com/s_000> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#StopTime> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/stoptimes/{trip_id}-{stop_id}-{arrival_time}" .
+
+<http://mapping.example.com/s_001> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Trip> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/trips/{trip_id}" .
+
+<http://mapping.example.com/s_002> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Route> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/routes/{route_id}" .
+
+<http://mapping.example.com/s_004> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Stop> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/stops/{stop_id}" .
+
+<http://mapping.example.com/s_005> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/services/{service_id}" .
+
+<http://mapping.example.com/s_006> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/services/{service_id}" .
+
+<http://mapping.example.com/source_000> a rr:LogicalTable ;
+    rr:tableName "STOP_TIMES" .
+
+<http://mapping.example.com/source_001> a rr:LogicalTable ;
+    rr:tableName "TRIPS" .
+
+<http://mapping.example.com/source_002> a rr:LogicalTable ;
+    rr:tableName "ROUTES" .
+
+<http://mapping.example.com/source_004> a rr:LogicalTable ;
+    rr:tableName "STOPS" .
+
+<http://mapping.example.com/source_005> a rr:LogicalTable ;
+    rr:tableName "CALENDAR" .
+
+<http://mapping.example.com/source_006> a rr:LogicalTable ;
+    rr:tableName "CALENDAR_DATES" .
+

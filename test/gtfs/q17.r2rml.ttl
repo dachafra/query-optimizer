@@ -1,0 +1,95 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+
+<http://mapping.example.com/map_frequencies_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_012> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_067>,
+        <http://mapping.example.com/pom_068>,
+        <http://mapping.example.com/pom_071> ;
+    rr:subjectMap <http://mapping.example.com/s_012> .
+
+<http://mapping.example.com/jc_004> rr:child "route_id" ;
+    rr:parent "route_id" .
+
+<http://mapping.example.com/jc_011> rr:child "trip_id" ;
+    rr:parent "trip_id" .
+
+<http://mapping.example.com/map_routes_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_002> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_017>,
+        <http://mapping.example.com/pom_020> ;
+    rr:subjectMap <http://mapping.example.com/s_002> .
+
+<http://mapping.example.com/map_trips_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_001> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_015> ;
+    rr:subjectMap <http://mapping.example.com/s_001> .
+
+<http://mapping.example.com/om_016> rr:joinCondition <http://mapping.example.com/jc_004> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_routes_000> .
+
+<http://mapping.example.com/om_018> rr:column "route_short_name" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_021> rr:template "http://transport.linkeddata.es/resource/RouteType/{route_type}" ;
+    rr:termType rr:IRI .
+
+<http://mapping.example.com/om_068> rr:column "start_time" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_069> rr:column "end_time" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_072> rr:joinCondition <http://mapping.example.com/jc_011> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_trips_000> .
+
+<http://mapping.example.com/pm_015> rr:constant <http://vocab.gtfs.org/terms#route> .
+
+<http://mapping.example.com/pm_017> rr:constant <http://vocab.gtfs.org/terms#shortName> .
+
+<http://mapping.example.com/pm_020> rr:constant <http://vocab.gtfs.org/terms#routeType> .
+
+<http://mapping.example.com/pm_067> rr:constant <http://vocab.gtfs.org/terms#startTime> .
+
+<http://mapping.example.com/pm_068> rr:constant <http://vocab.gtfs.org/terms#endTime> .
+
+<http://mapping.example.com/pm_071> rr:constant <http://vocab.gtfs.org/terms#trip> .
+
+<http://mapping.example.com/pom_015> rr:objectMap <http://mapping.example.com/om_016> ;
+    rr:predicateMap <http://mapping.example.com/pm_015> .
+
+<http://mapping.example.com/pom_017> rr:objectMap <http://mapping.example.com/om_018> ;
+    rr:predicateMap <http://mapping.example.com/pm_017> .
+
+<http://mapping.example.com/pom_020> rr:objectMap <http://mapping.example.com/om_021> ;
+    rr:predicateMap <http://mapping.example.com/pm_020> .
+
+<http://mapping.example.com/pom_067> rr:objectMap <http://mapping.example.com/om_068> ;
+    rr:predicateMap <http://mapping.example.com/pm_067> .
+
+<http://mapping.example.com/pom_068> rr:objectMap <http://mapping.example.com/om_069> ;
+    rr:predicateMap <http://mapping.example.com/pm_068> .
+
+<http://mapping.example.com/pom_071> rr:objectMap <http://mapping.example.com/om_072> ;
+    rr:predicateMap <http://mapping.example.com/pm_071> .
+
+<http://mapping.example.com/s_001> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Trip> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/trips/{trip_id}" .
+
+<http://mapping.example.com/s_002> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Route> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/routes/{route_id}" .
+
+<http://mapping.example.com/s_012> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Frequency> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/frequency/{trip_id}-{start_time}" .
+
+<http://mapping.example.com/source_001> a rr:LogicalTable ;
+    rr:tableName "TRIPS" .
+
+<http://mapping.example.com/source_002> a rr:LogicalTable ;
+    rr:tableName "ROUTES" .
+
+<http://mapping.example.com/source_012> a rr:LogicalTable ;
+    rr:tableName "FREQUENCIES" .
+

@@ -1,0 +1,61 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://mapping.example.com/map_stops_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_004> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_034>,
+        <http://mapping.example.com/pom_035>,
+        <http://mapping.example.com/pom_036>,
+        <http://mapping.example.com/pom_039>,
+        <http://mapping.example.com/pom_041> ;
+    rr:subjectMap <http://mapping.example.com/s_004> .
+
+<http://mapping.example.com/om_035> rr:column "stop_desc" ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_036> rr:column "stop_lat" ;
+    rr:datatype xsd:double ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_037> rr:column "stop_lon" ;
+    rr:datatype xsd:double ;
+    rr:termType rr:Literal .
+
+<http://mapping.example.com/om_040> rr:template "http://transport.linkeddata.es/resource/LocationType/{location_type}" ;
+    rr:termType rr:IRI .
+
+<http://mapping.example.com/om_042> rr:template "http://transport.linkeddata.es/resource/WheelchairBoardingStatus/{wheelchair_boarding}" ;
+    rr:termType rr:IRI .
+
+<http://mapping.example.com/pm_034> rr:constant <http://purl.org/dc/terms/description> .
+
+<http://mapping.example.com/pm_035> rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#lat> .
+
+<http://mapping.example.com/pm_036> rr:constant <http://www.w3.org/2003/01/geo/wgs84_pos#long> .
+
+<http://mapping.example.com/pm_039> rr:constant <http://vocab.gtfs.org/terms#locationType> .
+
+<http://mapping.example.com/pm_041> rr:constant <http://vocab.gtfs.org/terms#wheelchairAccessible> .
+
+<http://mapping.example.com/pom_034> rr:objectMap <http://mapping.example.com/om_035> ;
+    rr:predicateMap <http://mapping.example.com/pm_034> .
+
+<http://mapping.example.com/pom_035> rr:objectMap <http://mapping.example.com/om_036> ;
+    rr:predicateMap <http://mapping.example.com/pm_035> .
+
+<http://mapping.example.com/pom_036> rr:objectMap <http://mapping.example.com/om_037> ;
+    rr:predicateMap <http://mapping.example.com/pm_036> .
+
+<http://mapping.example.com/pom_039> rr:objectMap <http://mapping.example.com/om_040> ;
+    rr:predicateMap <http://mapping.example.com/pm_039> .
+
+<http://mapping.example.com/pom_041> rr:objectMap <http://mapping.example.com/om_042> ;
+    rr:predicateMap <http://mapping.example.com/pm_041> .
+
+<http://mapping.example.com/s_004> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Stop> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/stops/{stop_id}" .
+
+<http://mapping.example.com/source_004> a rr:LogicalTable ;
+    rr:tableName "STOPS" .
+

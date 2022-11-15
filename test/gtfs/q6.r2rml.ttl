@@ -1,0 +1,34 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+
+<http://mapping.example.com/map_routes_000> a rr:TriplesMap ;
+    rr:logicalTable <http://mapping.example.com/source_002> ;
+    rr:predicateObjectMap <http://mapping.example.com/pom_024> ;
+    rr:subjectMap <http://mapping.example.com/s_002> .
+
+<http://mapping.example.com/jc_006> rr:child "agency_id" ;
+    rr:parent "agency_id" .
+
+<http://mapping.example.com/map_agency_000> rr:logicalTable <http://mapping.example.com/source_003> ;
+    rr:subjectMap <http://mapping.example.com/s_003> .
+
+<http://mapping.example.com/om_025> rr:joinCondition <http://mapping.example.com/jc_006> ;
+    rr:parentTriplesMap <http://mapping.example.com/map_agency_000> .
+
+<http://mapping.example.com/pm_024> rr:constant <http://vocab.gtfs.org/terms#agency> .
+
+<http://mapping.example.com/pom_024> rr:objectMap <http://mapping.example.com/om_025> ;
+    rr:predicateMap <http://mapping.example.com/pm_024> .
+
+<http://mapping.example.com/s_002> a rr:SubjectMap ;
+    rr:class <http://vocab.gtfs.org/terms#Route> ;
+    rr:template "http://transport.linkeddata.es/madrid/metro/routes/{route_id}" .
+
+<http://mapping.example.com/s_003> a rr:SubjectMap ;
+    rr:template "http://transport.linkeddata.es/madrid/agency/{agency_id}" .
+
+<http://mapping.example.com/source_002> a rr:LogicalTable ;
+    rr:tableName "ROUTES" .
+
+<http://mapping.example.com/source_003> a rr:LogicalTable ;
+    rr:tableName "AGENCY" .
+

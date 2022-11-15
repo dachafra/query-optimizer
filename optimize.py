@@ -40,9 +40,12 @@ def get_prefixes_from_query():
 def get_subjects_from_query():
     subject = {}
     for triples in query[1]['where']['part']:
-        for path in triples['triples']:
-            if type(path[0]) is rdflib.term.Variable:
-                subject[path[0]] = []
+        if 'triples' not in triples and 'graph' in triples:
+            triples = triples['graph']['part'][0]
+        if 'triples' in triples:
+            for path in triples['triples']:
+                if type(path[0]) is rdflib.term.Variable:
+                    subject[path[0]] = []
     return subject
 
 
@@ -50,22 +53,25 @@ def get_resources_from_sparql():
     resources = get_subjects_from_query()
     prefixes = get_prefixes_from_query()
     for triples in query[1]['where']['part']:
-        for path in triples['triples']:
-            if type(path[1]) == rdflib.term.Variable:
-                raise Exception("Query has a variable")
-            else:
-                predicate = path[1]['part'][0]['part'][0]['part']
-                if "prefix" in predicate:
-                    predicate = URIRef(prefixes[predicate['prefix']] + predicate['localname'])
-
-                if predicate == RDF.type:
-                    if "prefix" in path[2]:
-                        resources[path[0]].append({
-                            "predicate": predicate, "type": URIRef(prefixes[path[2]['prefix']] + path[2]['localname'])})
-                    else:
-                        resources[path[0]].append({"predicate": predicate, "type": path[2]})
+        if 'triples' not in triples and 'graph' in triples:
+            triples = triples['graph']['part'][0]
+        if 'triples' in triples:
+            for path in triples['triples']:
+                if type(path[1]) == rdflib.term.Variable:
+                    raise Exception("Query has a variable")
                 else:
-                    resources[path[0]].append({"predicate": predicate})
+                    predicate = path[1]['part'][0]['part'][0]['part']
+                    if "prefix" in predicate:
+                        predicate = URIRef(prefixes[predicate['prefix']] + predicate['localname'])
+
+                    if predicate == RDF.type:
+                        if "prefix" in path[2]:
+                            resources[path[0]].append({
+                                "predicate": predicate, "type": URIRef(prefixes[path[2]['prefix']] + path[2]['localname'])})
+                        else:
+                            resources[path[0]].append({"predicate": predicate, "type": path[2]})
+                    else:
+                        resources[path[0]].append({"predicate": predicate})
 
     return resources
 
@@ -134,7 +140,7 @@ def add_predicate_object_map(triples_map, predicate, g):
             f'<{triples_map}> rr:predicateObjectMap ?pom . ' \
             f'?pom rr:predicate <{predicate}>. ?pom rr:object ?objects}}'
     results = mapping.query(query)
-    options = ['rr:column', 'rr:constant', 'rr:template']
+    options = ['rr:column', 'rr:template', 'rr:constant']
     index = 0
     while len(results) == 0 and index < 2:
         results = mapping.query(create_object_query(triples_map, predicate, options[index]))
