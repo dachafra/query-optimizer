@@ -40,12 +40,19 @@ def get_prefixes_from_query():
 def get_subjects_from_query():
     subject = {}
     for triples in query[1]['where']['part']:
+        triple_patterns = {'triples': []}
         if 'triples' not in triples and 'graph' in triples:
-            triples = triples['graph']['part'][0]
+            if type(triples['graph']) == rdflib.plugins.sparql.parserutils.plist:
+                for group in triples['graph']:
+                    triple_patterns['triples'].extend(group['part'][0]['triples'])
+            else:
+                triple_patterns = triples['graph']['part'][0]
         elif 'triples' not in triples and 'graph' in triples['expr']:
-            triples = triples['expr']['graph']['part'][0]
-        if 'triples' in triples:
-            for path in triples['triples']:
+            triple_patterns = triples['expr']['graph']['part'][0]
+        else:
+            triple_patterns = triples
+        if 'triples' in triple_patterns:
+            for path in triple_patterns['triples']:
                 if type(path[0]) is rdflib.term.Variable:
                     subject[path[0]] = []
     return subject
@@ -55,12 +62,20 @@ def get_resources_from_sparql():
     resources = get_subjects_from_query()
     prefixes = get_prefixes_from_query()
     for triples in query[1]['where']['part']:
-        if 'triples' not in triples and 'graph' in triples: #this means optional
-            triples = triples['graph']['part'][0]
-        elif 'triples' not in triples and 'graph' in triples['expr']:
-            triples = triples['expr']['graph']['part'][0]
-        if 'triples' in triples:
-            for path in triples['triples']:
+        triple_patterns = {'triples': []}
+        if 'triples' not in triples and 'graph' in triples:  # this means optional or union
+            if type(triples['graph']) == rdflib.plugins.sparql.parserutils.plist:  # this means union
+                for group in triples['graph']:
+                    triple_patterns['triples'].extend(group['part'][0]['triples'])
+            else:  # this means optional
+                triple_patterns = triples['graph']['part'][0]
+        elif 'triples' not in triples and 'graph' in triples['expr']:  # this means filter not exists
+            triple_patterns = triples['expr']['graph']['part'][0]
+        else:
+            triple_patterns = triples
+
+        if 'triples' in triple_patterns:
+            for path in triple_patterns['triples']:
                 if type(path[1]) == rdflib.term.Variable:
                     resources[path[0]].append({'all': True})
                 else:
@@ -71,7 +86,8 @@ def get_resources_from_sparql():
                     if predicate == RDF.type:
                         if "prefix" in path[2]:
                             resources[path[0]].append({
-                                "predicate": predicate, "type": URIRef(prefixes[path[2]['prefix']] + path[2]['localname'])})
+                                "predicate": predicate,
+                                "type": URIRef(prefixes[path[2]['prefix']] + path[2]['localname'])})
                         else:
                             resources[path[0]].append({"predicate": predicate, "type": path[2]})
                     else:
@@ -83,6 +99,7 @@ def get_resources_from_sparql():
                 raise Exception("There is an isolated triple pattern with an unbounded predicate. "
                                 "No optimization can be performed")
     return resources
+
 
 def get_predicates_classes_for_tm(triple):
     query_predicates = f'SELECT DISTINCT ?predicate WHERE {{ ' \
@@ -105,23 +122,26 @@ def get_predicates_classes_for_tm(triple):
 
     return predicates, classes
 
+
 def add_source_subject_from_tm(triples_map, g, remove_class=False):
     query = f'CONSTRUCT WHERE {{ ' \
-           f'<{triples_map}> rr:logicalTable ?source . ' \
-           f'?source ?source_predicates ?source_objects .'\
-           f'<{triples_map}> rr:subjectMap ?subjectMap . ' \
-           f'?subjectMap ?subject_predicates ?subject_objects }} '
+            f'<{triples_map}> rr:logicalTable ?source . ' \
+            f'?source ?source_predicates ?source_objects .' \
+            f'<{triples_map}> rr:subjectMap ?subjectMap . ' \
+            f'?subjectMap ?subject_predicates ?subject_objects }} '
     results = mapping.query(query)
     for s, p, o in results:
         if not remove_class or p != URIRef('http://www.w3.org/ns/r2rml#class'):
             g.add((s, p, o))
 
+
 def create_object_query(triples_map, predicate, object_type):
     return f'CONSTRUCT WHERE {{ ' \
-            f'<{triples_map}> rr:predicateObjectMap ?pom . ' \
-            f'?pom rr:predicateMap ?predicateMap . ?predicateMap rr:constant <{predicate}> . ' \
-            f'?pom rr:objectMap ?objectMap . ' \
-            f'?objectMap {object_type} ?object_value . }}'
+           f'<{triples_map}> rr:predicateObjectMap ?pom . ' \
+           f'?pom rr:predicateMap ?predicateMap . ?predicateMap rr:constant <{predicate}> . ' \
+           f'?pom rr:objectMap ?objectMap . ' \
+           f'?objectMap {object_type} ?object_value . }}'
+
 
 def add_refobject_query(triples_map, predicate, g):
     query = f'CONSTRUCT WHERE {{ ' \
@@ -138,11 +158,13 @@ def add_refobject_query(triples_map, predicate, g):
             g.add((triples_map, RDF.type, URIRef('http://www.w3.org/ns/r2rml#TriplesMap')))
         g.add((s, p, o))
 
+
 def add_object_features(object_id, predicate, g):
     query = f'CONSTRUCT WHERE {{ <{object_id}> {predicate} ?value. }}'
     results = mapping.query(query)
     for s, p, o in results:
         g.add((s, p, o))
+
 
 def add_predicate_object_map(triples_map, predicate, g):
     query = f'CONSTRUCT WHERE {{ ' \
@@ -163,6 +185,8 @@ def add_predicate_object_map(triples_map, predicate, g):
 
     if len(results) == 0 and predicate != URIRef(RDF.type):
         add_refobject_query(triples_map, predicate, g)
+
+
 def generate_optimized_mapping():
     mapping.bind('rr', rdflib.term.URIRef('http://www.w3.org/ns/r2rml#'))
     query_tm = f'SELECT ?triplesMap WHERE {{ ?triplesMap rdf:type rr:TriplesMap . }} '
