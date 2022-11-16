@@ -42,6 +42,8 @@ def get_subjects_from_query():
     for triples in query[1]['where']['part']:
         if 'triples' not in triples and 'graph' in triples:
             triples = triples['graph']['part'][0]
+        elif 'triples' not in triples and 'graph' in triples['expr']:
+            triples = triples['expr']['graph']['part'][0]
         if 'triples' in triples:
             for path in triples['triples']:
                 if type(path[0]) is rdflib.term.Variable:
@@ -53,8 +55,10 @@ def get_resources_from_sparql():
     resources = get_subjects_from_query()
     prefixes = get_prefixes_from_query()
     for triples in query[1]['where']['part']:
-        if 'triples' not in triples and 'graph' in triples:
+        if 'triples' not in triples and 'graph' in triples: #this means optional
             triples = triples['graph']['part'][0]
+        elif 'triples' not in triples and 'graph' in triples['expr']:
+            triples = triples['expr']['graph']['part'][0]
         if 'triples' in triples:
             for path in triples['triples']:
                 if type(path[1]) == rdflib.term.Variable:
