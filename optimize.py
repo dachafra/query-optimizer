@@ -58,7 +58,7 @@ def get_resources_from_sparql():
         if 'triples' in triples:
             for path in triples['triples']:
                 if type(path[1]) == rdflib.term.Variable:
-                    raise Exception("Query has a variable")
+                    resources[path[0]].append({'all': True})
                 else:
                     predicate = path[1]['part'][0]['part'][0]['part']
                     if "prefix" in predicate:
@@ -73,6 +73,11 @@ def get_resources_from_sparql():
                     else:
                         resources[path[0]].append({"predicate": predicate})
 
+    for key in resources.keys():
+        for pattern in resources[key]:
+            if 'all' in pattern and len(resources[key]) == 1:
+                raise Exception("There is an isolated triple pattern with an unbounded predicate. "
+                                "No optimization can be performed")
     return resources
 
 def get_predicates_classes_for_tm(triple):
@@ -166,15 +171,26 @@ def generate_optimized_mapping():
         query_keys = resources.keys()
         for key in query_keys:
             tm_for_query = True
+            add_all_predicates = False
             for resource in resources[key]:
-                if resource['predicate'] != RDF.type:
+                if 'all' in resource:
+                    add_all_predicates = True
+                elif resource['predicate'] != RDF.type:
                     if resource['predicate'] not in predicates:
                         tm_for_query = False
                 else:
                     if resource['type'] not in classes:
                         tm_for_query = False
+
             if tm_for_query:
-                selected_triples_map[triple] = resources[key]
+                if add_all_predicates:
+                    selected_triples_map[triple] = []
+                    for predicate in predicates:
+                        selected_triples_map[triple].append({"predicate": predicate})
+                    for c in classes:
+                        selected_triples_map[triple].append({"predicate": RDF.type, "type": c})
+                else:
+                    selected_triples_map[triple] = resources[key]
 
     for triples_map in selected_triples_map.keys():
         g = Graph()
@@ -190,6 +206,7 @@ def generate_optimized_mapping():
         optimized_mapping = optimized_mapping + g
 
     return optimized_mapping
+
 
 if __name__ == "__main__":
     args = define_args().parse_args()
