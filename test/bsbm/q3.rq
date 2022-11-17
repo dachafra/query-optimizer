@@ -6,16 +6,15 @@ PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 SELECT ?product ?label
 WHERE {
     ?product rdfs:label ?label .
-    ?product a %ProductType% .
-	?product bsbm:productFeature %ProductFeature1% .
+    ?product bsbm:productType ?productType .
+	?product bsbm:productFeature ?productFeature1 .
 	?product bsbm:productPropertyNumeric1 ?p1 .
-	FILTER ( ?p1 > %x% ) 
+	FILTER ( ?p1 > 289 ) 
 	?product bsbm:productPropertyNumeric3 ?p3 .
-	FILTER (?p3 < %y% )
+	FILTER (?p3 < 158)
     OPTIONAL { 
-        ?product bsbm:productFeature %ProductFeature2% .
-        ?product rdfs:label ?testVar }
-    FILTER (!bound(?testVar)) 
+        ?product bsbm:productFeature ?productFeature2 .
+        ?product rdfs:label ?testvar } 
 }
 ORDER BY ?label
 LIMIT 10

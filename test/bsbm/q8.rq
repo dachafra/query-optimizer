@@ -5,10 +5,9 @@ PREFIX foaf: <http://xmlns.com/foaf/0.1/>
 
 SELECT ?title ?text ?reviewDate ?reviewer ?reviewerName ?rating1 ?rating2 ?rating3 ?rating4 
 WHERE { 
-	?review bsbm:reviewFor %ProductXYZ% .
+	?review bsbm:reviewFor ?product .
 	?review dc:title ?title .
 	?review rev:text ?text .
-	FILTER langMatches( lang(?text), "EN" ) 
 	?review bsbm:reviewDate ?reviewDate .
 	?review rev:reviewer ?reviewer .
 	?reviewer foaf:name ?reviewerName .
