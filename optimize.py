@@ -155,7 +155,7 @@ def add_refobject_query(triples_map, predicate, g):
     for s, p, o in results:
         if p == URIRef('http://www.w3.org/ns/r2rml#parentTriplesMap'):
             add_source_subject_from_tm(o, g, True)
-            g.add((triples_map, RDF.type, URIRef('http://www.w3.org/ns/r2rml#TriplesMap')))
+            g.add((o, RDF.type, URIRef('http://www.w3.org/ns/r2rml#TriplesMap')))
         g.add((s, p, o))
 
 

@@ -8,6 +8,7 @@
             rr:predicateMap [ rr:constant <http://purl.org/stuff/rev#reviewer> ] ] ;
     rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/Review{nr}" ] .
 
-<http://example.com/base/#Person> rr:logicalTable [ rr:tableName "person" ] ;
+<http://example.com/base/#Person> a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "person" ] ;
     rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/Reviewer{nr}" ] .
 
