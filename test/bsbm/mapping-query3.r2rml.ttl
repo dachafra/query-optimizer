@@ -1,0 +1,27 @@
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+
+<http://example.com/base/#Product> a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "product" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "nr" ;
+                            rr:parent "product" ] ;
+                    rr:parentTriplesMap <http://example.com/base/#ProductTypeProduct> ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/productType> ] ],
+        [ rr:objectMap [ rr:column "label" ] ;
+            rr:predicateMap [ rr:constant rdfs:label ] ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "nr" ;
+                            rr:parent "product" ] ;
+                    rr:parentTriplesMap <http://example.com/base/#ProductFeatureProduct> ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/productFeature> ] ],
+        [ rr:objectMap [ rr:column "propertyNum1" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/productPropertyNumeric1> ] ],
+        [ rr:objectMap [ rr:column "propertyNum3" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/productPropertyNumeric3> ] ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer{producer}/Product{nr}" ] .
+
+<http://example.com/base/#ProductFeatureProduct> rr:logicalTable [ rr:tableName "productfeatureproduct" ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductFeature{productFeature}" ] .
+
+<http://example.com/base/#ProductTypeProduct> rr:logicalTable [ rr:tableName "producttypeproduct" ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/ProductType{productType}" ] .
+

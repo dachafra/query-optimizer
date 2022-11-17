@@ -1,0 +1,37 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+
+<http://example.com/base/#Review> a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "review" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "product" ;
+                            rr:parent "nr" ] ;
+                    rr:parentTriplesMap <http://example.com/base/#Product> ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/reviewFor> ] ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "person" ;
+                            rr:parent "nr" ] ;
+                    rr:parentTriplesMap <http://example.com/base/#Person> ] ;
+            rr:predicateMap [ rr:constant <http://purl.org/stuff/rev#reviewer> ] ],
+        [ rr:objectMap [ rr:column "reviewDate" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/reviewDate> ] ],
+        [ rr:objectMap [ rr:column "title" ] ;
+            rr:predicateMap [ rr:constant <http://purl.org/dc/elements/1.1/title> ] ],
+        [ rr:objectMap [ rr:column "text" ] ;
+            rr:predicateMap [ rr:constant <http://purl.org/stuff/rev#text> ] ],
+        [ rr:objectMap [ rr:column "rating1" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/rating1> ] ],
+        [ rr:objectMap [ rr:column "rating2" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/rating2> ] ],
+        [ rr:objectMap [ rr:column "rating3" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/rating3> ] ],
+        [ rr:objectMap [ rr:column "rating4" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/rating4> ] ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/Review{nr}" ] .
+
+<http://example.com/base/#Person> a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "person" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:column "name" ] ;
+            rr:predicateMap [ rr:constant <http://xmlns.com/foaf/0.1/name> ] ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/Reviewer{nr}" ] .
+
+<http://example.com/base/#Product> rr:logicalTable [ rr:tableName "product" ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer{producer}/Product{nr}" ] .
+

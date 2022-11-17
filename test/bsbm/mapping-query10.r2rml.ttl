@@ -1,0 +1,45 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+
+<http://example.com/base/#Offer> a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "offer" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:joinCondition [ rr:child "product" ;
+                            rr:parent "nr" ] ;
+                    rr:parentTriplesMap <http://example.com/base/#Product> ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/product> ] ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "vendor" ;
+                            rr:parent "nr" ] ;
+                    rr:parentTriplesMap <http://example.com/base/#Vendor> ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/vendor> ] ],
+        [ rr:objectMap [ rr:column "price" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/price> ] ],
+        [ rr:objectMap [ rr:column "validTo" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/validTo> ] ],
+        [ rr:objectMap [ rr:column "deliveryDays" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/deliveryDays> ] ],
+        [ rr:objectMap [ rr:joinCondition [ rr:child "publisher" ;
+                            rr:parent "nr" ] ;
+                    rr:parentTriplesMap <http://example.com/base/#Vendor> ] ;
+            rr:predicateMap [ rr:constant <http://purl.org/dc/elements/1.1/publisher> ] ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/Offer{nr}" ] .
+
+<http://example.com/base/#Person> a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "person" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://downlode.org/rdf/iso-3166/countries#{country}" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/country> ] ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/Reviewer{nr}" ] .
+
+<http://example.com/base/#Producer> a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "producer" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://downlode.org/rdf/iso-3166/countries#{country}" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/country> ] ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer{nr}/Producer{nr}" ] .
+
+<http://example.com/base/#Product> rr:logicalTable [ rr:tableName "product" ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/dataFromProducer{producer}/Product{nr}" ] .
+
+<http://example.com/base/#Vendor> a rr:TriplesMap ;
+    rr:logicalTable [ rr:tableName "vendor" ] ;
+    rr:predicateObjectMap [ rr:objectMap [ rr:template "http://downlode.org/rdf/iso-3166/countries#{country}" ] ;
+            rr:predicateMap [ rr:constant <http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/vocabulary/country> ] ] ;
+    rr:subjectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/Vendor{nr}" ] .
+
