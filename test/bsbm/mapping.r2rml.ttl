@@ -16,19 +16,19 @@ rr:subjectMap [
   rr:class bsbm:ProductFeature;
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:label;
+  rr:predicateMap [ rr:constant rdfs:label; ];
   rr:objectMap [ rr:column "label"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:comment;
+  rr:predicateMap [ rr:constant rdfs:comment; ];
   rr:objectMap [ rr:column "comment"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:publisher;
+  rr:predicateMap [ rr:constant dc:publisher; ];
   rr:objectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/StandardizationInstitution{publisher}"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:date;
+  rr:predicateMap [ rr:constant dc:date; ];
   rr:objectMap [ rr:column "publishDate"; ];
 ];
 .
@@ -39,15 +39,15 @@ rr:subjectMap [
   rr:class bsbm:ProductType;
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:label;
+  rr:predicateMap [ rr:constant rdfs:label; ];
   rr:objectMap [ rr:column "label"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:comment;
+  rr:predicateMap [ rr:constant rdfs:comment; ];
   rr:objectMap [ rr:column "comment"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:subClassOf;
+  rr:predicateMap [ rr:constant rdfs:subClassOf; ];
   rr:objectMap [
     rr:parentTriplesMap <#ProductType>;
     rr:joinCondition [
@@ -57,11 +57,11 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:publisher;
+  rr:predicateMap [ rr:constant dc:publisher; ];
   rr:objectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/StandardizationInstitution{publisher}"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:date;
+  rr:predicateMap [ rr:constant dc:date; ];
   rr:objectMap [ rr:column "publishDate"; ];
 ];
 .
@@ -72,28 +72,28 @@ rr:subjectMap [
   rr:class bsbm:Producer;
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:label;
+  rr:predicateMap [ rr:constant rdfs:label; ];
   rr:objectMap [ rr:column "label"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:comment;
+  rr:predicateMap [ rr:constant rdfs:comment; ];
   rr:objectMap [ rr:column "comment"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate foaf:homepage;
+  rr:predicateMap [ rr:constant foaf:homepage; ];
   rr:objectMap [
     rr:column "homepage";
     rr:termType rr:IRI;
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:country;
+  rr:predicateMap [ rr:constant bsbm:country; ];
   rr:objectMap [
     rr:template "http://downlode.org/rdf/iso-3166/countries#{country}";
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:publisher;
+  rr:predicateMap [ rr:constant dc:publisher; ];
   rr:objectMap [
     rr:parentTriplesMap <#Producer>;
     rr:joinCondition [
@@ -103,7 +103,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:date;
+  rr:predicateMap [ rr:constant dc:date; ];
   rr:objectMap [ rr:column "publishDate"; ];
 ];
 .
@@ -114,15 +114,15 @@ rr:subjectMap [
   rr:class bsbm:Product;
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:label;
+  rr:predicateMap [ rr:constant rdfs:label; ];
   rr:objectMap [ rr:column "label"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:comment;
+  rr:predicateMap [ rr:constant rdfs:comment; ];
   rr:objectMap [ rr:column "comment"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:producer;
+  rr:predicateMap [ rr:constant bsbm:producer; ];
   rr:objectMap [
     rr:parentTriplesMap <#Producer>;
     rr:joinCondition [
@@ -132,7 +132,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:publisher;
+  rr:predicateMap [ rr:constant dc:publisher; ];
   rr:objectMap [
     rr:parentTriplesMap <#Producer>;
     rr:joinCondition [
@@ -142,7 +142,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productFeature;
+  rr:predicateMap [ rr:constant bsbm:productFeature; ];
   rr:objectMap [
     rr:parentTriplesMap <#ProductFeatureProduct>;
     rr:joinCondition [
@@ -153,59 +153,59 @@ rr:predicateObjectMap [
 ];
 
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyNumeric1;
+  rr:predicateMap [ rr:constant bsbm:productPropertyNumeric1; ];
   rr:objectMap [ rr:column "propertyNum1"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyNumeric2;
+  rr:predicateMap [ rr:constant bsbm:productPropertyNumeric2; ];
   rr:objectMap [ rr:column "propertyNum2"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyNumeric3;
+  rr:predicateMap [ rr:constant bsbm:productPropertyNumeric3; ];
   rr:objectMap [ rr:column "propertyNum3"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyNumeric4;
+  rr:predicateMap [ rr:constant bsbm:productPropertyNumeric4; ];
   rr:objectMap [ rr:column "propertyNum4"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyNumeric5;
+  rr:predicateMap [ rr:constant bsbm:productPropertyNumeric5; ];
   rr:objectMap [ rr:column "propertyNum5"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyTextual6;
+  rr:predicateMap [ rr:constant bsbm:productPropertyTextual6; ];
   rr:objectMap [ rr:column "propertyNum6"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyTextual1;
+  rr:predicateMap [ rr:constant bsbm:productPropertyTextual1; ];
   rr:objectMap [ rr:column "propertyTex1"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyTextual2;
+  rr:predicateMap [ rr:constant bsbm:productPropertyTextual2; ];
   rr:objectMap [ rr:column "propertyTex2"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyTextual3;
+  rr:predicateMap [ rr:constant bsbm:productPropertyTextual3; ];
   rr:objectMap [ rr:column "propertyTex3"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyTextual4;
+  rr:predicateMap [ rr:constant bsbm:productPropertyTextual4; ];
   rr:objectMap [ rr:column "propertyTex4"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyTextual5;
+  rr:predicateMap [ rr:constant bsbm:productPropertyTextual5; ];
   rr:objectMap [ rr:column "propertyTex5"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productPropertyTextual6;
+  rr:predicateMap [ rr:constant bsbm:productPropertyTextual6; ];
   rr:objectMap [ rr:column "propertyTex6"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:date;
+  rr:predicateMap [ rr:constant dc:date; ];
   rr:objectMap [ rr:column "publishDate"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productType;
+  rr:predicateMap [ rr:constant bsbm:productType; ];
   rr:objectMap [
     rr:parentTriplesMap <#ProductTypeProduct>;
     rr:joinCondition [
@@ -228,7 +228,7 @@ rr:subjectMap [
   rr:class bsbm:Product;
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:productFeature;
+  rr:predicateMap [ rr:constant bsbm:productFeature; ];
   rr:objectMap [
     rr:parentTriplesMap <#ProductFeature>;
     rr:joinCondition [
@@ -245,28 +245,28 @@ rr:subjectMap [
   rr:class bsbm:Vendor;
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:label;
+  rr:predicateMap [ rr:constant rdfs:label; ];
   rr:objectMap [ rr:column "label"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate rdfs:comment;
+  rr:predicateMap [ rr:constant rdfs:comment; ];
   rr:objectMap [ rr:column "comment"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate foaf:homepage;
+  rr:predicateMap [ rr:constant foaf:homepage; ];
   rr:objectMap [
     rr:column "homepage";
     rr:termType rr:IRI;
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:country;
+  rr:predicateMap [ rr:constant bsbm:country; ];
   rr:objectMap [
     rr:template "http://downlode.org/rdf/iso-3166/countries#{country}";
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:publisher;
+  rr:predicateMap [ rr:constant dc:publisher; ];
   rr:objectMap [
     rr:parentTriplesMap <#Vendor>;
     rr:joinCondition [
@@ -276,7 +276,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:date;
+  rr:predicateMap [ rr:constant dc:date; ];
   rr:objectMap [ rr:column "publishDate"; ];
 ];
 .
@@ -287,7 +287,7 @@ rr:subjectMap [
   rr:class bsbm:Offer;
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:product;
+  rr:predicateMap [ rr:constant bsbm:product; ];
   rr:objectMap [
     rr:parentTriplesMap <#Product>;
     rr:joinCondition [
@@ -297,7 +297,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:producer;
+  rr:predicateMap [ rr:constant bsbm:producer; ];
   rr:objectMap [
     rr:parentTriplesMap <#Producer>;
     rr:joinCondition [
@@ -307,7 +307,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:vendor;
+  rr:predicateMap [ rr:constant bsbm:vendor; ];
   rr:objectMap [
     rr:parentTriplesMap <#Vendor>;
     rr:joinCondition [
@@ -317,30 +317,30 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:price;
+  rr:predicateMap [ rr:constant bsbm:price; ];
   rr:objectMap [ rr:column "price"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:validFrom;
+  rr:predicateMap [ rr:constant bsbm:validFrom; ];
   rr:objectMap [ rr:column "validFrom"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:validTo;
+  rr:predicateMap [ rr:constant bsbm:validTo; ];
   rr:objectMap [ rr:column "validTo"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:deliveryDays;
+  rr:predicateMap [ rr:constant bsbm:deliveryDays; ];
   rr:objectMap [ rr:column "deliveryDays"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:offerWebpage;
+  rr:predicateMap [ rr:constant bsbm:offerWebpage; ];
   rr:objectMap [
     rr:column "offerWebpage";
     rr:termType rr:IRI;
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:publisher;
+  rr:predicateMap [ rr:constant dc:publisher; ];
   rr:objectMap [
     rr:parentTriplesMap <#Vendor>;
     rr:joinCondition [
@@ -350,7 +350,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:date;
+  rr:predicateMap [ rr:constant dc:date; ];
   rr:objectMap [ rr:column "publishDate"; ];
 ];
 .
@@ -361,25 +361,25 @@ rr:subjectMap [
   rr:class bsbm:Person;
 ];
 rr:predicateObjectMap [
-  rr:predicate foaf:name;
+  rr:predicateMap [ rr:constant foaf:name; ];
   rr:objectMap [ rr:column "name"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate foaf:mbox_sha1sum;
+  rr:predicateMap [ rr:constant foaf:mbox_sha1sum; ];
   rr:objectMap [ rr:column "mbox_sha1sum"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:country;
+  rr:predicateMap [ rr:constant bsbm:country; ];
   rr:objectMap [
     rr:template "http://downlode.org/rdf/iso-3166/countries#{country}";
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:publisher;
+  rr:predicateMap [ rr:constant dc:publisher; ];
   rr:objectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/RatingSite{publisher}"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:date;
+  rr:predicateMap [ rr:constant dc:date; ];
   rr:objectMap [ rr:column "publishDate"; ];
 ];
 .
@@ -390,7 +390,7 @@ rr:subjectMap [
   rr:class bsbm:Review;
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:reviewFor;
+  rr:predicateMap [ rr:constant bsbm:reviewFor; ];
   rr:objectMap [
     rr:parentTriplesMap <#Product>;
     rr:joinCondition [
@@ -400,7 +400,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:producer;
+  rr:predicateMap [ rr:constant bsbm:producer; ];
   rr:objectMap [
     rr:parentTriplesMap <#Producer>;
     rr:joinCondition [
@@ -410,7 +410,7 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate rev:reviewer;
+  rr:predicateMap [ rr:constant rev:reviewer; ];
   rr:objectMap [
     rr:parentTriplesMap <#Person>;
     rr:joinCondition [
@@ -420,45 +420,45 @@ rr:predicateObjectMap [
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:reviewDate;
+  rr:predicateMap [ rr:constant bsbm:reviewDate; ];
   rr:objectMap [ rr:column "reviewDate"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:title;
+  rr:predicateMap [ rr:constant dc:title; ];
   rr:objectMap [
     rr:column "title";
     rr:language "en";
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate rev:text;
+  rr:predicateMap [ rr:constant rev:text; ];
   rr:objectMap [
     rr:column "text";
     rr:language "en";
   ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:rating1;
+  rr:predicateMap [ rr:constant bsbm:rating1; ];
   rr:objectMap [ rr:column "rating1"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:rating2;
+  rr:predicateMap [ rr:constant bsbm:rating2; ];
   rr:objectMap [ rr:column "rating2"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:rating3;
+  rr:predicateMap [ rr:constant bsbm:rating3; ];
   rr:objectMap [ rr:column "rating3"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate bsbm:rating4;
+  rr:predicateMap [ rr:constant bsbm:rating4; ];
   rr:objectMap [ rr:column "rating4"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:publisher;
+  rr:predicateMap [ rr:constant dc:publisher; ];
   rr:objectMap [ rr:template "http://www4.wiwiss.fu-berlin.de/bizer/bsbm/v01/instances/RatingSite{publisher}"; ];
 ];
 rr:predicateObjectMap [
-  rr:predicate dc:date;
+  rr:predicateMap [ rr:constant dc:date; ];
   rr:objectMap [ rr:column "publishDate"; ];
 ];
 .
